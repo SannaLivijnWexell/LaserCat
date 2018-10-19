@@ -167,7 +167,7 @@ fireBullet() {
         let asteroid = this.physics.add.image(x, y, graphic);
         
         // EXISTING CODE
-        asteroid.setVelocity(0, 150);
+        asteroid.setVelocity(0, 200);
         
         this.asteroidGroup.add(asteroid);
         
