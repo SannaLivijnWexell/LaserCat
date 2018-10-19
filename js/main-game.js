@@ -1,4 +1,4 @@
-const playerShipSpeed = 250;
+const playerShipSpeed = 300;
 
 class MainGameScene extends Phaser.Scene {
     
@@ -23,6 +23,7 @@ class MainGameScene extends Phaser.Scene {
         //Add more code here
     }
     
+     
 
     create()
     {
@@ -166,7 +167,7 @@ fireBullet() {
         let asteroid = this.physics.add.image(x, y, graphic);
         
         // EXISTING CODE
-        asteroid.setVelocity(0, 100);
+        asteroid.setVelocity(0, 150);
         
         this.asteroidGroup.add(asteroid);
         
