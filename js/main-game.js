@@ -9,7 +9,7 @@ class MainGameScene extends Phaser.Scene {
     
     preload()
     {
-        this.load.image('player-ship', 'assets/images/katt.png');
+        this.load.image('player-ship', 'assets/images/katt2.png');
         this.load.image('hamburger-medium', 'assets/images/hamburger.png');
         this.load.image('pizza-medium', 'assets/images/pizza.png');
         this.load.image('taco-medium', 'assets/images/taco.png');        
