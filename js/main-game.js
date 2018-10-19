@@ -1,4 +1,4 @@
-const playerShipSpeed = 300;
+const playerShipSpeed = 400;
 
 class MainGameScene extends Phaser.Scene {
     
@@ -39,11 +39,13 @@ class MainGameScene extends Phaser.Scene {
         this.music.play();
         
         //Create an astroid timer
-        this.asteroidTimer = 3000;
+        this.asteroidTimer = 2000;
         
         this.bulletGroup = this.add.group();
         
         this.bulletTimer = 0;
+        
+         this.playerScore = 0;
         
         //Add more code here
     }
@@ -78,7 +80,7 @@ class MainGameScene extends Phaser.Scene {
         
         if ( this.asteroidTimer < 0 ) {
             this.createAsteroid();
-            this.asteroidTimer = 3000;
+            this.asteroidTimer = 2000;
         }
         
         if (this.cursors.space.isDown) {
@@ -167,9 +169,11 @@ fireBullet() {
         let asteroid = this.physics.add.image(x, y, graphic);
         
         // EXISTING CODE
-        asteroid.setVelocity(0, 200);
+        asteroid.setVelocity(0, 300);
         
         this.asteroidGroup.add(asteroid);
+        
+        asteroid.setAngularVelocity(180.0);
         
     }    
 
