@@ -45,7 +45,20 @@ class MainGameScene extends Phaser.Scene {
         
         this.bulletTimer = 0;
         
-         this.playerScore = 0;
+        this.playerScore = 0;
+        
+        // You probably want to add two labels at this point, one fixed label which just says “SCORE” and a second label to contain the actual value of the player’s score. Then it’s super easy to update the player’s score when it changes - as you just have to update the scoreValue label instead of the scoreTitle label.
+        
+        var textStyle = {font: "16px Arial", fill: "#ffffff", align: "center"}
+
+        this.scoreTitle = this.add.text(50, 30, "SCORE", textStyle);
+        this.scoreTitle.fixedToCamera = true;
+        this.scoreTitle.setOrigin(0.5, 0.5);
+
+        this.scoreValue = this.add.text(50, 60, "0", textStyle);
+        this.scoreValue.fixedToCamera = true;
+        this.scoreValue.setOrigin(0.5, 0.5);
+        
         
         //Add more code here
     }
@@ -108,13 +121,17 @@ class MainGameScene extends Phaser.Scene {
         this.bulletTimer -= delta; 
         
         
-                // Collide
-            this.physics.overlap(this.asteroidGroup, this.bulletGroup, this.onAsteroidBulletCollision, null, this);
+        // Collide
+        this.physics.overlap(this.asteroidGroup, this.bulletGroup, this.onAsteroidBulletCollision, null, this);
+        
         }
 
         onAsteroidBulletCollision(asteroid, bullet) {
             asteroid.destroy();
             bullet.destroy();
+            
+        this.playerScore += 5;        
+        this.scoreValue.setText(this.playerScore);
         
         
         
