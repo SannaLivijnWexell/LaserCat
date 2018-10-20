@@ -7,7 +7,7 @@ class TitleScene extends Phaser.Scene {
     
     preload()
     {
-        this.load.image('space-bg', 'assets/images/space.jpg');
+        this.load.image('space-bg', 'assets/images/space2.jpg');
         this.load.audio('title-music', 'assets/music/titlescreen.mp3');
         
         this.timeToFlashText = 700;
@@ -24,7 +24,7 @@ class TitleScene extends Phaser.Scene {
         
         let centerX = this.game.config.width / 2;
         
-        this.titleText = this.add.text(centerX, 100, 'Space Avengers', { fontSize: '32px', fill: '#fff' });
+        this.titleText = this.add.text(centerX, 100, 'Laser Cat', { fontSize: '32px', fill: '#fff' });
         this.titleText.setOrigin(0.5);       // Center Text
         
         this.clickStartText = this.add.text(centerX, this.game.config.height - 100, 'Click Anywhere or press Space to Start', { fontSize: '16px', fill: '#fff' });
