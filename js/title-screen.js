@@ -9,6 +9,7 @@ class TitleScene extends Phaser.Scene {
     {
         this.load.image('space-bg', 'assets/images/space2.jpg');
         this.load.audio('title-music', 'assets/music/titlescreen.mp3');
+        this.load.image('cat', 'assets/images/katt2.jpg');
         
         this.timeToFlashText = 700;
     }
@@ -24,7 +25,7 @@ class TitleScene extends Phaser.Scene {
         
         let centerX = this.game.config.width / 2;
         
-        this.titleText = this.add.text(centerX, 100, 'Laser Cat', { fontSize: '32px', fill: '#fff' });
+        this.titleText = this.add.text(centerX, 100, 'Laser Cat Attack', { fontSize: '32px', fill: '#fff' });
         this.titleText.setOrigin(0.5);       // Center Text
         
         this.clickStartText = this.add.text(centerX, this.game.config.height - 100, 'Click Anywhere or press Space to Start', { fontSize: '16px', fill: '#fff' });
@@ -33,6 +34,8 @@ class TitleScene extends Phaser.Scene {
         this.input.on('pointerdown', function (pointer) {
             this.startGame();
         }, this);
+        
+
     }
 
     update(time, delta)
