@@ -1,4 +1,4 @@
-const playerShipSpeed = 400;
+const playerShipSpeed = 500;
 
 class MainGameScene extends Phaser.Scene {
     
@@ -14,11 +14,17 @@ class MainGameScene extends Phaser.Scene {
         this.load.image('pizza-medium', 'assets/images/pizza.png');
         this.load.image('taco-medium', 'assets/images/taco.png');        
         this.load.image('space2', 'assets/images/space2.jpg')
-        
-        this.load.audio('gamemusic','assets/music/maingame.mp3');
         this.load.image('bullet', 'assets/images/bullet-simple.png');
-
         
+        this.load.audio('gamemusic','assets/music/ES_ElectroChildren - Alexander Munk.mp3');
+        
+        
+        this.load.audio('player_fire_01', 'assets/audio/player_fire_01.mp3');
+        this.load.audio('player_fire_02', 'assets/audio/player_fire_02.mp3');
+        this.load.audio('player_fire_03', 'assets/audio/player_fire_03.mp3');
+        this.load.audio('player_fire_04', 'assets/audio/player_fire_04.mp3');
+        this.load.audio('player_fire_05', 'assets/audio/player_fire_05.mp3');
+        this.load.audio('player_fire_06', 'assets/audio/player_fire_06.mp3');
         
         //Add more code here
     }
@@ -59,21 +65,15 @@ class MainGameScene extends Phaser.Scene {
         this.scoreValue.fixedToCamera = true;
         this.scoreValue.setOrigin(0.5, 0.5);
         
+        this.playerScore = 0;
+        
         // Maybe you could remove 1 point every time an asteroid disappears off the bottom of the screen so that the player feels some pressure to stop asteroids from disappearing off the bottom of the screen.
-        //        
+     
         
-//        var textStyle = {font: "16px Arial", fill: "#ffffff", align: "center"}
-//
-//        this.scoreTitle = this.add.text(50, 30, "SCORE", textStyle);
-//        this.scoreTitle.fixedToCamera = true;
-//        this.scoreTitle.setOrigin(0.5, 0.5);
-//
-//        this.scoreValue = this.add.text(50, 60, "0", textStyle);
-//        this.scoreValue.fixedToCamera = true;
-//        this.scoreValue.setOrigin(0.5, 0.5);
-//
-//        this.playerScore = 0;         
-        
+
+
+         
+        // Players lives
         this.playerLives = 3;
         
         // 2. Add the Text
@@ -94,6 +94,13 @@ class MainGameScene extends Phaser.Scene {
         
         // 3. React to Collisions
         
+        
+        
+        var displayOptions = {
+            font: "16px Arial", 
+            fill: "#ffffff", 
+            align: "center"
+        }
         
         
         //Add more code here
@@ -137,17 +144,17 @@ class MainGameScene extends Phaser.Scene {
         }
         
         /// NEW MESSY TEXT
-            if (this.cursors.space.isDown) {
-        this.fireBullet();
-    }   
+        if (this.cursors.space.isDown) {
+            this.fireBullet();
+        }   
         
         let bullets = this.bulletGroup.getChildren();
 
         for(let i = 0; i < bullets.length; i++) {
             let bullet = bullets[i];
         
-            if ( bullet.y < 0 ) {
-                bullet.destroy();
+        if ( bullet.y < 0 ) {
+            bullet.destroy();
             }    
         }    
         
@@ -166,15 +173,36 @@ class MainGameScene extends Phaser.Scene {
             asteroid.destroy();
             bullet.destroy();
             
-        this.playerScore += 5;        
-        this.scoreValue.setText(this.playerScore);
+            this.playerScore += 5;        
+            this.scoreValue.setText(this.playerScore);
+            
+            
+            
+            
+            
+//        onAsteroidBulletCollision(object1, object2) {
+//            ...
+//            this.playerScore += 10;        
+//            this.scoreValue.setText(this.playerScore);
+//        }
+
             
         // Maybe you could remove 1 point every time an asteroid disappears off the bottom of the screen so that the player feels some pressure to stop asteroids from disappearing off the bottom of the screen.    
         //        
-        //        this.playerScore += -10;        
-        //        this.scoreValue.setText(this.playerScore);
+
             
         
+        
+            
+            
+            
+        //React to collisions and 
+//        onAsteroidPlayerCollision(asteroid, player) {
+//            asteroid.destroy();
+//            this.playerLives -= 1;
+//            this.livesValue.setText(this.playerLives);
+//        }    
+            
         
         
 }
@@ -236,7 +264,7 @@ fireBullet() {
         let asteroid = this.physics.add.image(x, y, graphic);
         
         // EXISTING CODE
-        asteroid.setVelocity(0, 300);
+        asteroid.setVelocity(0, 500);
         
         this.asteroidGroup.add(asteroid);
         
