@@ -9,7 +9,7 @@ class TitleScene extends Phaser.Scene {
     {
         this.load.image('space-bg', 'assets/images/space2.jpg');
         this.load.audio('title-music', 'assets/music/titlescreen.mp3');
-        this.load.image('cat', 'assets/images/katt2.jpg');
+        this.load.image('cat', 'assets/images/katt2.png');
         
         this.timeToFlashText = 700;
     }
@@ -19,14 +19,28 @@ class TitleScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();        
         this.add.image(0, 0, 'space-bg');
         
+        //Add cat image
+        this.cursors = this.input.keyboard.createCursorKeys();        
+        this.add.image(300, 420, 'cat');
+        //End add cat image
+        
+        
         this.music = this.sound.add('title-music');
         this.music.volume = 0.3;
         this.music.play();
         
         let centerX = this.game.config.width / 2;
         
-        this.titleText = this.add.text(centerX, 100, 'Laser Cat Attack', { fontSize: '32px', fill: '#fff' });
+        this.titleText = this.add.text(centerX, 140, 'Laser Cat Attack', { fontSize: '40px', fill: '#fff' });
         this.titleText.setOrigin(0.5);       // Center Text
+        
+        //try to create text
+        this.Text = this.add.text(centerX, 240, '(Game description)', { fontSize: '16px', fill: '#fff' });
+        this.Text.setOrigin(0.5);       // Center Text
+        //try to create text end
+        
+        
+        
         
         this.clickStartText = this.add.text(centerX, this.game.config.height - 100, 'Click Anywhere or press Space to Start', { fontSize: '16px', fill: '#fff' });
         this.clickStartText.setOrigin(0.5);
