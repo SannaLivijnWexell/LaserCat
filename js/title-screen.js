@@ -28,6 +28,7 @@ class TitleScene extends Phaser.Scene {
         this.music = this.sound.add('title-music');
         this.music.volume = 0.3;
         this.music.play();
+        this.music.loop = true;
         
         let centerX = this.game.config.width / 2;
         

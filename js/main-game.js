@@ -26,6 +26,8 @@ class MainGameScene extends Phaser.Scene {
         this.load.audio('player_fire_05', 'assets/audio/player_fire_05.mp3');
         this.load.audio('player_fire_06', 'assets/audio/player_fire_06.mp3');
         
+        this.load.audio('fire-bullet', 'assets/audio/player_fire_01.mp3');
+        
         //Add more code here
     }
     
@@ -43,6 +45,7 @@ class MainGameScene extends Phaser.Scene {
         
         this.music = this.sound.add('gamemusic');
         this.music.play();
+        this.music.loop = true;
         
         //Create an astroid timer
         this.asteroidTimer = 2000;
@@ -101,6 +104,22 @@ class MainGameScene extends Phaser.Scene {
             fill: "#ffffff", 
             align: "center"
         }
+        
+        
+        
+        this.playerFireSfx = [];
+        this.playerFireSfx.push(this.sound.add("player_fire_01"));
+        this.playerFireSfx.push(this.sound.add("player_fire_02"));
+        this.playerFireSfx.push(this.sound.add("player_fire_03"));
+        this.playerFireSfx.push(this.sound.add("player_fire_04"));
+        this.playerFireSfx.push(this.sound.add("player_fire_05"));
+        this.playerFireSfx.push(this.sound.add("player_fire_06"));
+
+        this.fireSound = this.sound.add('fire-bullet');
+        
+        
+        
+        
         
         
         //Add more code here
@@ -166,8 +185,8 @@ class MainGameScene extends Phaser.Scene {
         
         // Collide
         this.physics.overlap(this.asteroidGroup, this.bulletGroup, this.onAsteroidBulletCollision, null, this);
-        
-        }
+        this.physics.overlap(this.asteroidGroup, this.playerShip, this.onAsteroidPlayerCollision, null, this);
+    }
 
         onAsteroidBulletCollision(asteroid, bullet) {
             asteroid.destroy();
@@ -175,20 +194,27 @@ class MainGameScene extends Phaser.Scene {
             
             this.playerScore += 5;        
             this.scoreValue.setText(this.playerScore);
+        }
             
             
-            
-            
-            
-//        onAsteroidBulletCollision(object1, object2) {
-//            ...
-//            this.playerScore += 10;        
-//            this.scoreValue.setText(this.playerScore);
-//        }
+            //Show the Game Over Screen
+        onAsteroidPlayerCollision(asteroid, player) {
+            asteroid.destroy();
+            this.playerLives -= 1;
+            this.livesValue.setText(this.playerLives);
 
+            if ( this.playerLives <= 0 ) {
+                lastGameScore = this.playerScore;
+                this.scene.start("GameOverScene");        
+            }
+        }
+            
+
+
+           
             
         // Maybe you could remove 1 point every time an asteroid disappears off the bottom of the screen so that the player feels some pressure to stop asteroids from disappearing off the bottom of the screen.    
-        //        
+        // ????       
 
             
         
@@ -196,16 +222,12 @@ class MainGameScene extends Phaser.Scene {
             
             
             
-        //React to collisions and 
+        //React to collisions between player and food/asteroid - loose lives
 //        onAsteroidPlayerCollision(asteroid, player) {
 //            asteroid.destroy();
 //            this.playerLives -= 1;
 //            this.livesValue.setText(this.playerLives);
-//        }    
-            
-        
-        
-}
+//        }
     
     
     
@@ -225,6 +247,14 @@ fireBullet() {
 
         this.bulletGroup.add(bullet);
         this.bulletTimer = 300; // 300 ms
+        
+        this.fireSound.play();
+        
+        
+//        var index = game.rnd.integerInRange(0, this.playerFireSfx.length - 1);
+//        this.playerFireSfx[index].play();
+        
+        
     }
     //END MESSY TEXT
      
